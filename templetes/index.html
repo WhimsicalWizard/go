@@ -6,6 +6,10 @@
     <title>Document</title>
 </head>
 <body>
-    <h2 style="color: aqua;">Hello, {{.}}</h2>
+{{range.}}
+{{if not .Age}}
+<label>{{.Name}}</label>
+{{end}}
+{{end}}
 </body>
 </html>

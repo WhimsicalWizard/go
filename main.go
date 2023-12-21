@@ -7,14 +7,20 @@ import (
 
 var tmp *template.Template
 
-func main() {
-	tmp, _ = template.ParseFiles("index.html")
-	http.HandleFunc("/", helloWord)
-	http.ListenAndServe(":8080", nil)
+type Student struct {
+	Name string
+	Age  bool
 }
 
-func helloWord(w http.ResponseWriter, r *http.Request) {
-	name := "Slone"
-	tmp.Execute(w, name)
-	//fmt.Fprint(w, "hello")
+var data []Student
+
+func main() {
+	http.HandleFunc("/", hello)
+	tmp, _ = template.ParseGlob("templetes/*.html")
+	data = []Student{{"Subham", true}, {"Jonsey", false}, {"Desodemona", true}, {"Peely", false}}
+	http.ListenAndServe("", nil)
+}
+
+func hello(w http.ResponseWriter, r *http.Request) {
+	tmp.ExecuteTemplate(w, "index.html", data)
 }
