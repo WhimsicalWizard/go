@@ -6,10 +6,15 @@
     <title>Document</title>
 </head>
 <body>
-{{range.}}
-{{if not .Age}}
-<label>{{.Name}}</label>
-{{end}}
-{{end}}
+
+
+<form method="get" action="/processForm">
+    <label for="nameID">Name</label>
+    <input type="text" id="nameId"="name" >
+    <label for="age">Age</label>
+    <input type="text" name="age" >
+
+    <input type="submit" name="submit" >
+</form>
 </body>
 </html>

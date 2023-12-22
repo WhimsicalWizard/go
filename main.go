@@ -7,20 +7,19 @@ import (
 
 var tmp *template.Template
 
-type Student struct {
-	Name string
-	Age  bool
-}
-
-var data []Student
-
 func main() {
 	http.HandleFunc("/", hello)
+	http.HandleFunc("/processForm", processHandler)
 	tmp, _ = template.ParseGlob("templetes/*.html")
-	data = []Student{{"Subham", true}, {"Jonsey", false}, {"Desodemona", true}, {"Peely", false}}
+
 	http.ListenAndServe("", nil)
 }
 
 func hello(w http.ResponseWriter, r *http.Request) {
-	tmp.ExecuteTemplate(w, "index.html", data)
+	tmp.ExecuteTemplate(w, "index.html", nil)
+}
+
+func processHandler(w http.ResponseWriter, r *http.Request) {
+	n := r.FormValue("name")
+	tmp.ExecuteTemplate(w, "form.html", n)
 }
